@@ -11,19 +11,77 @@
         <p class="el-paragraph">温馨提示：不急不占、无事不占、不动不占</p>
 
         <el-form ref="form" :model="gua" label-width="120px">
-            <el-form-item label="请输入当前月份（农历）">
-                <el-input v-model="gua.month"></el-input>
+            <el-form-item label="请选择当前月份（农历）">
+                <el-select v-model="gua.month" placeholder="请选择">
+                    <el-option label="1月" value="1"></el-option>
+                    <el-option label="2月" value="2"></el-option>
+                    <el-option label="3月" value="3"></el-option>
+                    <el-option label="4月" value="4"></el-option>
+                    <el-option label="5月" value="5"></el-option>
+                    <el-option label="6月" value="6"></el-option>
+                    <el-option label="7月" value="7"></el-option>
+                    <el-option label="8月" value="8"></el-option>
+                    <el-option label="9月" value="9"></el-option>
+                    <el-option label="10月" value="10"></el-option>
+                    <el-option label="11月" value="11"></el-option>
+                    <el-option label="12月" value="12"></el-option>
+                    <!-- 其他月份选项 -->
+                </el-select>
             </el-form-item>
 
-            <el-form-item label="请输入当前日期（农历）">
-                <el-input v-model="gua.day"></el-input>
+            <el-form-item label="请选择当前日期（农历）">
+                <el-select v-model="gua.day" placeholder="请选择">
+                    <el-option label="1日" value="1"></el-option>
+                    <el-option label="2日" value="2"></el-option>
+                    <el-option label="3日" value="3"></el-option>
+                    <el-option label="4日" value="4"></el-option>
+                    <el-option label="5日" value="5"></el-option>
+                    <el-option label="6日" value="6"></el-option>
+                    <el-option label="7日" value="7"></el-option>
+                    <el-option label="8日" value="8"></el-option>
+                    <el-option label="9日" value="9"></el-option>
+                    <el-option label="10日" value="10"></el-option>
+                    <el-option label="11日" value="11"></el-option>
+                    <el-option label="12日" value="12"></el-option>
+                    <el-option label="13日" value="13"></el-option>
+                    <el-option label="14日" value="14"></el-option>
+                    <el-option label="15日" value="15"></el-option>
+                    <el-option label="16日" value="16"></el-option>
+                    <el-option label="17日" value="17"></el-option>
+                    <el-option label="18日" value="18"></el-option>
+                    <el-option label="19日" value="19"></el-option>
+                    <el-option label="20日" value="20"></el-option>
+                    <el-option label="21日" value="21"></el-option>
+                    <el-option label="22日" value="22"></el-option>
+                    <el-option label="23日" value="23"></el-option>
+                    <el-option label="24日" value="24"></el-option>
+                    <el-option label="25日" value="25"></el-option>
+                    <el-option label="26日" value="26"></el-option>
+                    <el-option label="27日" value="27"></el-option>
+                    <el-option label="28日" value="28"></el-option>
+                    <el-option label="29日" value="29"></el-option>
+                    <el-option label="30日" value="30"></el-option>
+                    <el-option label="31日" value="31"></el-option>
+                    <!-- 其他日期选项 -->
+                </el-select>
             </el-form-item>
 
             <el-form-item label="选择当前时辰（农历）">
                 <el-select v-model="gua.hour" placeholder="请选择">
                     <el-option label="子 23:00 ~ 01:00" value="1"></el-option>
                     <el-option label="丑 01:00 ~ 03:00" value="2"></el-option>
-                    <!-- 其他选项 -->
+                    <el-option label="寅 03:00 ~ 05:00" value="3"></el-option>
+                    <el-option label="卯 05:00 ~ 07:00" value="4"></el-option>
+                    <el-option label="辰 07:00 ~ 09:00" value="5"></el-option>
+                    <el-option label="巳 09:00 ~ 11:00" value="6"></el-option>
+                    <el-option label="午 11:00 ~ 13:00" value="7"></el-option>
+                    <el-option label="未 13:00 ~ 15:00" value="8"></el-option>
+                    <el-option label="申 15:00 ~ 17:00" value="9"></el-option>
+                    <el-option label="酉 17:00 ~ 19:00" value="10"></el-option>
+                    <el-option label="戌 19:00 ~ 21:00" value="11"></el-option>
+                    <el-option label="亥 21:00 ~ 23:00" value="12"></el-option>
+                    
+                    <!-- 其他时辰选项 -->
                 </el-select>
             </el-form-item>
         </el-form>
