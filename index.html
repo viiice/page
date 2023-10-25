@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>小六壬占卜</title>
 </head>
 <body>
-<p>Hello World!</p>
+    <h1>小六壬占卜</h1>
+
+    <p>请选择时间：</p>
+    <label for="month">月：</label>
+    <input type="number" id="month" min="1" max="12" value="1">
+    
+    <label for="day">日：</label>
+    <input type="number" id="day" min="1" max="31" value="1">
+    
+    <label for="hour">时：</label>
+    <input type="number" id="hour" min="0" max="23" value="0">
+    
+    <button onclick="calculateHexagram()">计算卦象</button>
+
+    <p>卦象结果：</p>
+    <div id="hexagramResult"></div>
+
+    <script>
+        function calculateHexagram() {
+            const month = parseInt(document.getElementById("month").value);
+            const day = parseInt(document.getElementById("day").value);
+            const hour = parseInt(document.getElementById("hour").value);
+
+            // 在这里，你可以编写小六壬卦象的计算逻辑
+            // 然后将结果显示在 #hexagramResult 元素中
+            // 这里需要编写一些 JavaScript 代码来处理时间和卦象的计算
+        }
+    </script>
 </body>
 </html>
