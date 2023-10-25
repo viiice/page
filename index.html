@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>小六壬占卜</title>
+    <title>小六壬起卦器</title>
 </head>
 <body>
-    <h1>小六壬占卜</h1>
+    <h1>小六壬起卦器</h1>
+    <p>温馨提示：不急不占、无事不占、不动不占</p>
+    
+    <label for="month">请输入当前月份（农历）：</label>
+    <input type="text" id="month" /><br />
+    
+    <label for="day">请输入当前日期（农历）：</label>
+    <input type="text" id="day" /><br />
+    
+    <p>选择当前时辰（农历）：</p>
+    <select id="hour">
+        <option value="1">子 23:00 ~ 01:00</option>
+        <option value="2">丑 01:00 ~ 03:00</option>
+        <option value="3">寅 03:00 ~ 05:00</option>
+        <option value="4">卯 05:00 ~ 07:00</option>
+        <option value="5">辰 07:00 ~ 09:00</option>
+        <option value="6">巳 09:00 ~ 11:00</option>
+        <option value="7">午 11:00 ~ 13:00</option>
+        <option value="8">未 13:00 ~ 15:00</option>
+        <option value="9">申 15:00 ~ 17:00</option>
+        <option value="10">酉 17:00 ~ 19:00</option>
+        <option value="11">戌 19:00 ~ 21:00</option>
+        <option value="12">亥 21:00 ~ 23:00</option>
+    </select><br />
 
-    <p>请选择时间：</p>
-    <label for="month">月：</label>
-    <input type="number" id="month" min="1" max="12" value="1">
+    <button onclick="calculateGua()">开始起卦</button>
     
-    <label for="day">日：</label>
-    <input type="number" id="day" min="1" max="31" value="1">
-    
-    <label for="hour">时：</label>
-    <input type="number" id="hour" min="0" max="23" value="0">
-    
-    <button onclick="calculateHexagram()">计算卦象</button>
-
-    <p>卦象结果：</p>
-    <div id="hexagramResult"></div>
+    <p>起卦结果：<span id="result"></span></p>
 
     <script>
-        function calculateHexagram() {
-            const month = parseInt(document.getElementById("month").value);
-            const day = parseInt(document.getElementById("day").value);
-            const hour = parseInt(document.getElementById("hour").value);
-
-            // 这只是一个简化的示例，实际小六壬计算要更复杂
-            const hexagrams = ["乾", "坤", "震", "巽", "坎", "离", "艮", "兑"];
-            const index = (month + day + hour) % 8;
-            const result = hexagrams[index];
-
-            document.getElementById("hexagramResult").innerHTML = "对应的卦象为：" + result;
+        function calculateGua() {
+            var month = parseInt(document.getElementById("month").value);
+            var day = parseInt(document.getElementById("day").value);
+            var hour = parseInt(document.getElementById("hour").value);
+            
+            var begin = 0;
+            var mid1 = (begin + month) % 6;
+            var mid2 = (mid1 + day - 1) % 6;
+            var end = (mid2 + hour - 1) % 6;
+            
+            var result = "";
+            switch (end) {
+                case 1:
+                    result = "大安";
+                    break;
+                case 2:
+                    result = "流连";
+                    break;
+                case 3:
+                    result = "速喜";
+                    break;
+                case 4:
+                    result = "赤口";
+                    break;
+                case 5:
+                    result = "小吉";
+                    break;
+                case 0:
+                    result = "空亡";
+                    break;
+            }
+            
+            document.getElementById("result").textContent = result;
         }
     </script>
 </body>
