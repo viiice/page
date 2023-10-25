@@ -27,9 +27,12 @@
             const day = parseInt(document.getElementById("day").value);
             const hour = parseInt(document.getElementById("hour").value);
 
-            // 在这里，你可以编写小六壬卦象的计算逻辑
-            // 然后将结果显示在 #hexagramResult 元素中
-            // 这里需要编写一些 JavaScript 代码来处理时间和卦象的计算
+            // 这只是一个简化的示例，实际小六壬计算要更复杂
+            const hexagrams = ["乾", "坤", "震", "巽", "坎", "离", "艮", "兑"];
+            const index = (month + day + hour) % 8;
+            const result = hexagrams[index];
+
+            document.getElementById("hexagramResult").innerHTML = "对应的卦象为：" + result;
         }
     </script>
 </body>
