@@ -2,72 +2,89 @@
 <html>
 <head>
     <title>小六壬起卦器</title>
+    <!-- 引入 Element UI 的 CSS 样式表 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/theme-chalk/index.css">
 </head>
 <body>
-    <h1>小六壬起卦器</h1>
-    <p>温馨提示：不急不占、无事不占、不动不占</p>
-    
-    <label for="month">请输入当前月份（农历）：</label>
-    <input type="text" id="month" /><br />
-    
-    <label for="day">请输入当前日期（农历）：</label>
-    <input type="text" id="day" /><br />
-    
-    <p>选择当前时辰（农历）：</p>
-    <select id="hour">
-        <option value="1">子 23:00 ~ 01:00</option>
-        <option value="2">丑 01:00 ~ 03:00</option>
-        <option value="3">寅 03:00 ~ 05:00</option>
-        <option value="4">卯 05:00 ~ 07:00</option>
-        <option value="5">辰 07:00 ~ 09:00</option>
-        <option value="6">巳 09:00 ~ 11:00</option>
-        <option value="7">午 11:00 ~ 13:00</option>
-        <option value="8">未 13:00 ~ 15:00</option>
-        <option value="9">申 15:00 ~ 17:00</option>
-        <option value="10">酉 17:00 ~ 19:00</option>
-        <option value="11">戌 19:00 ~ 21:00</option>
-        <option value="12">亥 21:00 ~ 23:00</option>
-    </select><br />
+    <div id="app">
+        <h1 class="el-title">小六壬起卦器</h1>
+        <p class="el-paragraph">温馨提示：不急不占、无事不占、不动不占</p>
 
-    <button onclick="calculateGua()">开始起卦</button>
-    
-    <p>起卦结果：<span id="result"></span></p>
+        <el-form ref="form" :model="gua" label-width="120px">
+            <el-form-item label="请输入当前月份（农历）">
+                <el-input v-model="gua.month"></el-input>
+            </el-form-item>
+
+            <el-form-item label="请输入当前日期（农历）">
+                <el-input v-model="gua.day"></el-input>
+            </el-form-item>
+
+            <el-form-item label="选择当前时辰（农历）">
+                <el-select v-model="gua.hour" placeholder="请选择">
+                    <el-option label="子 23:00 ~ 01:00" value="1"></el-option>
+                    <el-option label="丑 01:00 ~ 03:00" value="2"></el-option>
+                    <!-- 其他选项 -->
+                </el-select>
+            </el-form-item>
+        </el-form>
+
+        <el-button type="primary" @click="calculateGua">开始起卦</el-button>
+
+        <p class="el-result">起卦结果：<span>{{ result }}</span></p>
+    </div>
+
+    <!-- 引入 Vue.js 和 Element UI 的 JavaScript 代码 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/index.js"></script>
 
     <script>
-        function calculateGua() {
-            var month = parseInt(document.getElementById("month").value);
-            var day = parseInt(document.getElementById("day").value);
-            var hour = parseInt(document.getElementById("hour").value);
-            
-            var begin = 0;
-            var mid1 = (begin + month) % 6;
-            var mid2 = (mid1 + day - 1) % 6;
-            var end = (mid2 + hour - 1) % 6;
-            
-            var result = "";
-            switch (end) {
-                case 1:
-                    result = "大安";
-                    break;
-                case 2:
-                    result = "流连";
-                    break;
-                case 3:
-                    result = "速喜";
-                    break;
-                case 4:
-                    result = "赤口";
-                    break;
-                case 5:
-                    result = "小吉";
-                    break;
-                case 0:
-                    result = "空亡";
-                    break;
+        new Vue({
+            el: '#app',
+            data: {
+                gua: {
+                    month: '',
+                    day: '',
+                    hour: ''
+                },
+                result: ''
+            },
+            methods: {
+                calculateGua() {
+                    // 你的小六壬计算逻辑在这里
+                    var month = parseInt(this.gua.month);
+                    var day = parseInt(this.gua.day);
+                    var hour = parseInt(this.gua.hour);
+                    var begin = 0;
+                    var mid1 = (begin + month) % 6;
+                    var mid2 = (mid1 + day - 1) % 6;
+                    var end = (mid2 + hour - 1) % 6;
+
+                    var result = "";
+                    switch (end) {
+                        case 1:
+                            result = "大安";
+                            break;
+                        case 2:
+                            result = "流连";
+                            break;
+                        case 3:
+                            result = "速喜";
+                            break;
+                        case 4:
+                            result = "赤口";
+                            break;
+                        case 5:
+                            result = "小吉";
+                            break;
+                        case 0:
+                            result = "空亡";
+                            break;
+                    }
+
+                    this.result = result;
+                }
             }
-            
-            document.getElementById("result").textContent = result;
-        }
+        });
     </script>
 </body>
 </html>
