@@ -6,24 +6,41 @@
     <!-- 引入 Element UI 的 CSS 样式表 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/theme-chalk/index.css">
     <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-
-    #app {
-        width: 90vh;
-        height: 80vh; /* 使用vh单位，相对于视口高度 */
-        margin: auto;
-        text-align: center;
+    body {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        min-height: 100vh;
+        font-size: 16px; /* 设置默认字体大小 */
+        margin: 0; /* 去除页面边距 */
+    }
+
+    #app {
+        text-align: center;
+        max-width: 80%; /* 限制内容的最大宽度 */
+        padding: 10px; /* 添加内边距，增加内容部分的空间 */
+    }
+
+    .el-form-item {
+        margin-bottom: 10px;
+    }
+
+    .el-button {
+        margin: 10px auto;
+    }
+
+    .el-result {
+        text-align: center;
+    }
+
+    @media screen and (min-width: 768px) {
+        /* 在较大屏幕（电脑端）上应用以下样式 */
+        #app {
+            max-width: 60%; /* 适当减小内容区域的宽度 */
+        }
     }
 </style>
-
     
 </head>
 
