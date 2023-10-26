@@ -6,18 +6,34 @@
     <!-- 引入 Element UI 的 CSS 样式表 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/theme-chalk/index.css">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-size: 16px; /* Adjust the font size for mobile */
+    }
 
-        #app {
-            text-align: center;
-        }
-    </style>
+    #app {
+        text-align: center;
+        max-width: 80%; /* Limit the width for better mobile readability */
+    }
+
+    .el-form-item {
+        margin-bottom: 10px; /* Add some margin between form items */
+    }
+
+    /* Center the button and result text */
+    .el-button {
+        margin: 10px auto;
+    }
+
+    .el-result {
+        text-align: center;
+    }
+</style>
+
 </head>
 
 <body>
