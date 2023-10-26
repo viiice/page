@@ -12,19 +12,20 @@
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        font-size: 16px; /* Adjust the font size for mobile */
+        font-size: 16px; /* 设置默认字体大小 */
+        margin: 0; /* 去除页面边距 */
     }
 
     #app {
         text-align: center;
-        max-width: 80%; /* Limit the width for better mobile readability */
+        max-width: 80%; /* 限制内容的最大宽度 */
+        padding: 10px; /* 添加内边距，增加内容部分的空间 */
     }
 
     .el-form-item {
-        margin-bottom: 10px; /* Add some margin between form items */
+        margin-bottom: 10px;
     }
 
-    /* Center the button and result text */
     .el-button {
         margin: 10px auto;
     }
@@ -32,8 +33,15 @@
     .el-result {
         text-align: center;
     }
-</style>
 
+    @media screen and (min-width: 768px) {
+        /* 在较大屏幕（电脑端）上应用以下样式 */
+        #app {
+            max-width: 60%; /* 适当减小内容区域的宽度 */
+        }
+    }
+</style>
+    
 </head>
 
 <body>
