@@ -6,26 +6,21 @@
     <!-- 引入 Element UI 的 CSS 样式表 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/theme-chalk/index.css">
     <style>
-    body {
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    #app {
+        width: 90%; /* 设置宽度为屏幕宽度的90% */
+        height: 80%; /* 设置高度为屏幕高度的80% */
+        margin: auto; /* 水平居中 */
+        text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 100vh;
-        margin: 0; /* 重置默认页边距 */
-        padding: 0; /* 重置默认页边距 */
-    }
-
-    #app {
-        text-align: center;
-        padding: 20px; /* 设置默认页边距 */
-    }
-
-    @media (max-width: 768px) {
-        /* 在小屏幕上减小页边距 */
-        #app {
-            padding: 10px;
-        }
     }
     </style>
     
