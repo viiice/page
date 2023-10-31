@@ -1,66 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>按钮页面</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十六进制计算器</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.1/lib/theme-chalk/index.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #app {
+            text-align: center;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <div id="app">
-        <el-button @click="toggleButton(0)" :type="buttonStates[0] ? 'success' : 'default">0</el-button>
-        <el-button @click="toggleButton(1)" :type="buttonStates[1] ? 'success' : 'default">1</el-button>
-        <el-button @click="toggleButton(2)" :type="buttonStates[2] ? 'success' : 'default">2</el-button>
-        <el-button @click="toggleButton(3)" :type="buttonStates[3] ? 'success' : 'default">3</el-button>
-        <el-button @click="toggleButton(4)" :type="buttonStates[4] ? 'success' : 'default">4</el-button>
-        <el-button @click="toggleButton(5)" :type="buttonStates[5] ? 'success' : 'default">5</el-button>
-        <el-button @click="toggleButton(6)" :type="buttonStates[6] ? 'success' : 'default">6</el-button>
-        <el-button @click="toggleButton(7)" :type="buttonStates[7] ? 'success' : 'default">7</el-button>
-        
-        <div>
-            <p>第一组的值：{{ hexValues[0] }}</p>
-            <p>第二组的值：{{ hexValues[1] }}</p>
-            <p>组合值：{{ combinedValue }}</p>
+        <h2 class="el-title">51单片机P1口值计算器</h2>
+        <h4 class="el-paragraph">温馨提示：<br>未选中表示低电平<br>选中表示高电平</h4>
+        <el-button-group>
+            <el-button v-for="(button, index) in buttons" :key="index"
+                :type="selectedButtons.includes(index) ? 'success' : 'default'" @click="toggleButton(index)">
+                P1.{{ index }}
+            </el-button>
+        </el-button-group>
+        <div style="margin-top: 10px;">
+            <el-button @click="calculateHex">计算</el-button>
+            <el-button @click="resetButtons">重置</el-button>
         </div>
+
+        <h1 style="margin-top: 10px;">
+            <p>值: {{ combinedValue }}</p>
+        </h1>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.1/lib/index.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                buttonStates: [false, false, false, false, false, false, false, false],
-                values: [1, 2, 4, 8, 1, 2, 4, 8],
-                hexValues: ['0x00', '0x00'],
-                combinedValue: '0x00'
+                buttons: [1, 2, 4, 8, 1, 2, 4, 8],
+                selectedButtons: [],
+                hexValue1: '',
+                hexValue2: '',
+                combinedValue: '0x00',
             },
             methods: {
                 toggleButton(index) {
-                    this.buttonStates[index] = !this.buttonStates[index];
-                    this.calculateValues();
+                    if (this.selectedButtons.includes(index)) {
+                        this.selectedButtons = this.selectedButtons.filter(btn => btn !== index);
+                    } else {
+                        this.selectedButtons.push(index);
+                    }
                 },
-                calculateValues() {
-                    let group1Value = 0;
-                    let group2Value = 0;
-
-                    for (let i = 7; i >= 4; i--) {
-                        if (this.buttonStates[i]) {
-                            group1Value += this.values[i];
+                resetButtons() {
+                    this.selectedButtons = [];
+                    this.hexValue1 = '';
+                    this.hexValue2 = '';
+                    this.combinedValue = '0x00';
+                },
+                calculateHex() {
+                    let value1 = 0;
+                    let value2 = 0;
+                    for (const index of this.selectedButtons) {
+                        if (index >= 4) {
+                            value1 += this.buttons[index];
+                        } else {
+                            value2 += this.buttons[index];
                         }
                     }
-
-                    for (let i = 3; i >= 0; i--) {
-                        if (this.buttonStates[i]) {
-                            group2Value += this.values[i];
-                        }
-                    }
-
-                    this.hexValues[0] = '0x' + group1Value.toString(16);
-                    this.hexValues[1] = '0x' + group2Value.toString(16);
-                    this.combinedValue = '0x' + group1Value.toString(16) + group2Value.toString(16);
-                }
-            }
+                    this.combinedValue = `0x${value1.toString(16)}${value2.toString(16)}`;
+                },
+            },
         });
     </script>
 </body>
+
 </html>
