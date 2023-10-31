@@ -1,223 +1,66 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>小六壬起卦器</title>
-    <!-- 引入 Element UI 的 CSS 样式表 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/theme-chalk/index.css">
-    <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        font-size: 16px; /* 设置默认字体大小 */
-        margin: 0; /* 去除页面边距 */
-    }
-
-    #app {
-        text-align: center;
-        max-width: 80%; /* 限制内容的最大宽度 */
-        padding: 10px; /* 添加内边距，增加内容部分的空间 */
-    }
-
-    .el-form-item {
-        margin-bottom: 10px;
-    }
-
-    .el-button {
-        margin: 10px auto;
-    }
-
-    .el-result {
-        text-align: center;
-    }
-
-    @media screen and (min-width: 768px) {
-        /* 在较大屏幕（电脑端）上应用以下样式 */
-        #app {
-            max-width: 60%; /* 适当减小内容区域的宽度 */
-        }
-    }
-</style>
-    
+    <meta charset="UTF-8">
+    <title>按钮页面</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css">
 </head>
-
 <body>
     <div id="app">
-        <h1 class="el-title">小六壬起卦器</h1>
-        <p class="el-paragraph">温馨提示：不急不占、无事不占、不动不占</p>
-        <p>
-            当前时间:
-            <span id="current-time"></span>
-        </p>
-        <el-form ref="form" :model="gua" label-width="200px">
-            <el-form-item label="请选择当前月份（农历）">
-                <el-select v-model="gua.month" placeholder="请选择">
-                    <el-option label="1月" value="1"></el-option>
-                    <el-option label="2月" value="2"></el-option>
-                    <el-option label="3月" value="3"></el-option>
-                    <el-option label="4月" value="4"></el-option>
-                    <el-option label="5月" value="5"></el-option>
-                    <el-option label="6月" value="6"></el-option>
-                    <el-option label="7月" value="7"></el-option>
-                    <el-option label="8月" value="8"></el-option>
-                    <el-option label="9月" value="9"></el-option>
-                    <el-option label="10月" value="10"></el-option>
-                    <el-option label="11月" value="11"></el-option>
-                    <el-option label="12月" value="12"></el-option>
-                    <!-- 其他月份选项 -->
-                </el-select>
-            </el-form-item>
-
-            <el-form-item label="请选择当前日期（农历）">
-                <el-select v-model="gua.day" placeholder="请选择">
-                    <el-option label="1日" value="1"></el-option>
-                    <el-option label="2日" value="2"></el-option>
-                    <el-option label="3日" value="3"></el-option>
-                    <el-option label="4日" value="4"></el-option>
-                    <el-option label="5日" value="5"></el-option>
-                    <el-option label="6日" value="6"></el-option>
-                    <el-option label="7日" value="7"></el-option>
-                    <el-option label="8日" value="8"></el-option>
-                    <el-option label="9日" value="9"></el-option>
-                    <el-option label="10日" value="10"></el-option>
-                    <el-option label="11日" value="11"></el-option>
-                    <el-option label="12日" value="12"></el-option>
-                    <el-option label="13日" value="13"></el-option>
-                    <el-option label="14日" value="14"></el-option>
-                    <el-option label="15日" value="15"></el-option>
-                    <el-option label="16日" value="16"></el-option>
-                    <el-option label="17日" value="17"></el-option>
-                    <el-option label="18日" value="18"></el-option>
-                    <el-option label="19日" value="19"></el-option>
-                    <el-option label="20日" value="20"></el-option>
-                    <el-option label="21日" value="21"></el-option>
-                    <el-option label="22日" value="22"></el-option>
-                    <el-option label="23日" value="23"></el-option>
-                    <el-option label="24日" value="24"></el-option>
-                    <el-option label="25日" value="25"></el-option>
-                    <el-option label="26日" value="26"></el-option>
-                    <el-option label="27日" value="27"></el-option>
-                    <el-option label="28日" value="28"></el-option>
-                    <el-option label="29日" value="29"></el-option>
-                    <el-option label="30日" value="30"></el-option>
-                    <el-option label="31日" value="31"></el-option>
-                    <!-- 其他日期选项 -->
-                </el-select>
-            </el-form-item>
-
-            <el-form-item label="选择当前时辰（农历）">
-                <el-select v-model="gua.hour" placeholder="请选择">
-                    <el-option label="子 23:00 ~ 01:00" value="1"></el-option>
-                    <el-option label="丑 01:00 ~ 03:00" value="2"></el-option>
-                    <el-option label="寅 03:00 ~ 05:00" value="3"></el-option>
-                    <el-option label="卯 05:00 ~ 07:00" value="4"></el-option>
-                    <el-option label="辰 07:00 ~ 09:00" value="5"></el-option>
-                    <el-option label="巳 09:00 ~ 11:00" value="6"></el-option>
-                    <el-option label="午 11:00 ~ 13:00" value="7"></el-option>
-                    <el-option label="未 13:00 ~ 15:00" value="8"></el-option>
-                    <el-option label="申 15:00 ~ 17:00" value="9"></el-option>
-                    <el-option label="酉 17:00 ~ 19:00" value="10"></el-option>
-                    <el-option label="戌 19:00 ~ 21:00" value="11"></el-option>
-                    <el-option label="亥 21:00 ~ 23:00" value="12"></el-option>
-
-                    <!-- 其他时辰选项 -->
-                </el-select>
-            </el-form-item>
-        </el-form>
-
-        <el-button type="primary" @click="calculateGua">开始起卦</el-button>
-
-        <p class="el-result">起卦结果：<span>{{ result }}</span></p>
+        <el-button @click="toggleButton(0)" :type="buttonStates[0] ? 'success' : 'default">0</el-button>
+        <el-button @click="toggleButton(1)" :type="buttonStates[1] ? 'success' : 'default">1</el-button>
+        <el-button @click="toggleButton(2)" :type="buttonStates[2] ? 'success' : 'default">2</el-button>
+        <el-button @click="toggleButton(3)" :type="buttonStates[3] ? 'success' : 'default">3</el-button>
+        <el-button @click="toggleButton(4)" :type="buttonStates[4] ? 'success' : 'default">4</el-button>
+        <el-button @click="toggleButton(5)" :type="buttonStates[5] ? 'success' : 'default">5</el-button>
+        <el-button @click="toggleButton(6)" :type="buttonStates[6] ? 'success' : 'default">6</el-button>
+        <el-button @click="toggleButton(7)" :type="buttonStates[7] ? 'success' : 'default">7</el-button>
+        
+        <div>
+            <p>第一组的值：{{ hexValues[0] }}</p>
+            <p>第二组的值：{{ hexValues[1] }}</p>
+            <p>组合值：{{ combinedValue }}</p>
+        </div>
     </div>
 
-    <!-- 引入 Vue.js 和 Element UI 的 JavaScript 代码 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.6/lib/index.js"></script>
-
-    <script>
-        function updateTime() {
-            var now = new Date();
-
-            var year = now.getFullYear();
-            var month = now.getMonth() + 1;
-            var date = now.getDate();
-
-            var hour = now.getHours();
-            var minute = now.getMinutes();
-            var second = now.getSeconds();
-            // 格式化时间为两位数
-            hour = hour < 10 ? '0' + hour : hour;
-            minute = minute < 10 ? '0' + minute : minute;
-            second = second < 10 ? '0' + second : second;
-
-            document.getElementById("current-time").innerHTML =
-                year + "年" + month + "月" + date + "日 "
-                + hour + ":" + minute + ":" + second;
-        }
-        updateTime(); // 初始化时间
-        setInterval(updateTime, 1000);
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/element-ui@2.15.1/lib/index.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                gua: {
-                    month: '',
-                    day: '',
-                    hour: ''
-                },
-                result: ''
+                buttonStates: [false, false, false, false, false, false, false, false],
+                values: [1, 2, 4, 8, 1, 2, 4, 8],
+                hexValues: ['0x00', '0x00'],
+                combinedValue: '0x00'
             },
             methods: {
-                calculateGua() {
-                    // 你的小六壬计算逻辑在这里
-                    var month = parseInt(this.gua.month);
-                    var day = parseInt(this.gua.day);
-                    var hour = parseInt(this.gua.hour);
-                    var begin = 0;
-                    var mid1 = (begin + month) % 6;
-                    var mid2 = (mid1 + day - 1) % 6;
-                    var end = (mid2 + hour - 1) % 6;
+                toggleButton(index) {
+                    this.buttonStates[index] = !this.buttonStates[index];
+                    this.calculateValues();
+                },
+                calculateValues() {
+                    let group1Value = 0;
+                    let group2Value = 0;
 
-                    var result = "";
-                    switch (end) {
-                        case 1:
-                            result = "大安";
-                            break;
-                        case 2:
-                            result = "流连";
-                            break;
-                        case 3:
-                            result = "速喜";
-                            break;
-                        case 4:
-                            result = "赤口";
-                            break;
-                        case 5:
-                            result = "小吉";
-                            break;
-                        case 0:
-                            result = "空亡";
-                            break;
+                    for (let i = 7; i >= 4; i--) {
+                        if (this.buttonStates[i]) {
+                            group1Value += this.values[i];
+                        }
                     }
 
-                    this.result = result;
+                    for (let i = 3; i >= 0; i--) {
+                        if (this.buttonStates[i]) {
+                            group2Value += this.values[i];
+                        }
+                    }
 
-                    if (!this.gua.month || !this.gua.day || !this.gua.hour) {
-                        // 如果有参数未选择完全，弹出提示框
-                        this.$message.error('请将参数选择完整');
-                        return;
-                    }
-                    else {
-                        this.$message.success('卜卦成功，卜卦结果:' + result)
-                    }
+                    this.hexValues[0] = '0x' + group1Value.toString(16);
+                    this.hexValues[1] = '0x' + group2Value.toString(16);
+                    this.combinedValue = '0x' + group1Value.toString(16) + group2Value.toString(16);
                 }
             }
         });
     </script>
 </body>
-
 </html>
